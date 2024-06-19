@@ -1,77 +1,51 @@
 - name: bug
   description: Something isn't working
-  count: ''
-  color: d73a4a
-  link: https://www.github.com/arashmad/user-management-service/labels/bug
+  color: 'd73a4a'
 
 - name: deployment
   description: ''
-  count: '1'
-  color: d4c5f9
-  link: https://www.github.com/arashmad/user-management-service/labels/deployment
+  color: 'd4c5f9'
 
 - name: documentation
   description: Improvements or additions to documentation
-  count: '1'
-  color: 0075ca
-  link: https://www.github.com/arashmad/user-management-service/labels/documentation
+  color: '0075ca'
 
 - name: duplicate
   description: This issue or pull request already exists
-  count: ''
-  color: cfd3d7
-  link: https://www.github.com/arashmad/user-management-service/labels/duplicate
+  color: 'cfd3d7'
 
 - name: high priority
   description: task which has high priority
-  count: '1'
-  color: dd7656
-  link: https://www.github.com/arashmad/user-management-service/labels/high%20priority
+  color: 'dd7656'
 
 - name: improvement
   description: ''
-  count: '1'
   color: '286227'
-  link: https://www.github.com/arashmad/user-management-service/labels/improvement
 
 - name: invalid
   description: This doesn't seem right
-  count: ''
-  color: e4e669
-  link: https://www.github.com/arashmad/user-management-service/labels/invalid
+  color: 'e4e669'
 
 - name: low priority
   description: task which has low priority
-  count: ''
-  color: cfe29d
-  link: https://www.github.com/arashmad/user-management-service/labels/low%20priority
+  color: 'cfe29d'
 
 - name: medium priority
   description: task which has medium priority
-  count: ''
-  color: f9b112
-  link: https://www.github.com/arashmad/user-management-service/labels/medium%20priority
+  color: 'f9b112'
 
 - name: new feature
   description: New feature or request
-  count: ''
-  color: a2eeef
-  link: https://www.github.com/arashmad/user-management-service/labels/new%20feature
+  color: 'a2eeef'
 
 - name: question
   description: Further information is requested
-  count: ''
-  color: d876e3
-  link: https://www.github.com/arashmad/user-management-service/labels/question
+  color: 'd876e3'
 
 - name: test and coverage
   description: ''
-  count: '2'
-  color: c5a416
-  link: https://www.github.com/arashmad/user-management-service/labels/test%20and%20coverage
+  color: 'c5a416'
 
 - name: wontfix
   description: This will not be worked on
-  count: ''
-  color: ffffff
-  link: https://www.github.com/arashmad/user-management-service/labels/wontfix
+  color: 'ffffff'
