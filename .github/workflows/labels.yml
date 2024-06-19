@@ -13,12 +13,12 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                  sparse-checkout: .github/workflow/labels.json
+                  sparse-checkout: .github/workflows/labels.json
 
             - uses: EndBug/label-sync@v2
               with:
                   # As a file
-                  config-file: .github/workflow/labels.json
+                  config-file: .github/workflows/labels.json
 
                   # As an online resource
                   # config-file: https://raw.githubusercontent.com/EndBug/labels/main/labels.yml
