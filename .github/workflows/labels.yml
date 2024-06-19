@@ -1,42 +1,13 @@
 name: Sync labels
 on:
-    push:
-        branches:
-            - main
-        paths:
-            - .github/workflows/labels.json
-    # You can run this with every type of event, but it's better to run it only when you actually need it.
-    # workflow_dispatch:
-
-permissions:
-    issues: write
+    workflow_dispatch:
 
 jobs:
-    update-labels:
-        runs-on: ubuntu-latest
+    sync:
+        name: Run EndBug/label-sync
+        runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v4
-            - uses: micnncim/action-label-syncer@v1
+            - uses: EndBug/label-sync@v2
               with:
-                  manifest: .github/workflows/labels.json
-                  token: ${{ secrets.GIT_TOKEN_UPDATE_LABELS }}
-              # with:
-              #     sparse-checkout: .github/workflows/labels.json
-
-            # - uses: EndBug/label-sync@v2
-            #   with:
-            #       # As a file
-            #       config-file: .github/workflows/labels.json
-
-            #       # As an online resource
-            #       # config-file: https://raw.githubusercontent.com/EndBug/labels/main/labels.yml
-            #       # source-repo: arashmad/${{ github.repository }}
-            #       # request-token: ${{ secrets.GITHUB_TOKEN }}
-
-            #       # Deleting any additional label?
-            #       delete-other-labels: false
-
-            #       # Show the preview of the changes, without actually editing the labels?
-            #       dry-run: true
-
-            #       # Token used to change the labels
+                  config-file: '.github/workflows/label.json'
