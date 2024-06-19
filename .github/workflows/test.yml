@@ -1,0 +1,10 @@
+name: Application Test
+on:
+    push:
+        paths:
+            - .github/workflows/test.yml
+    # workflow_dispatch:
+
+jobs:
+    test:
+    build:
