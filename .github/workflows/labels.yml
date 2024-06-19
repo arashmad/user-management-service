@@ -17,10 +17,9 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: micnncim/action-label-syncer@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GIT_TOKEN_UPDATE_LABELS }}
               with:
                   manifest: .github/workflows/labels.json
+                  token: ${{ secrets.GIT_TOKEN_UPDATE_LABELS }}
               # with:
               #     sparse-checkout: .github/workflows/labels.json
 
@@ -41,4 +40,3 @@ jobs:
             #       dry-run: true
 
             #       # Token used to change the labels
-            #       token: ${{ secrets.GIT_TOKEN_UPDATE_LABELS }}
