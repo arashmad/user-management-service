@@ -6,7 +6,7 @@
 
 [![NodeJS](https://img.shields.io/badge/NodeJS-v20.12.2-darkgreen)](https://nodejs.org/en)
 [![ExpressJS](https://img.shields.io/badge/ExpressJS-v4.19.2-lightgrey)](https://expressjs.com/)
-[![coverage](https://img.shields.io/badge/coverage-0.00-red)]()
+[![codecov](https://codecov.io/gh/arashmad/user-management-service/graph/badge.svg?token=SH4KKTQLZ3)](https://codecov.io/gh/arashmad/user-management-service)
 
 </div>
 
