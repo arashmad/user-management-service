@@ -10,4 +10,4 @@ jobs:
             - uses: actions/checkout@v4
             - uses: EndBug/label-sync@v2
               with:
-                  config-file: '.github/workflows/label.json'
+                  config-file: .github/workflows/labels.json
