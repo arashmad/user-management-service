@@ -1,0 +1,46 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Shutdown = exports.Main = exports.httpServer = exports.application = void 0;
+var http_1 = require("http");
+var express_1 = require("express");
+require("./config/logging");
+var loggingHandler_1 = require("./middleware/loggingHandler");
+var corsHandler_1 = require("./middleware/corsHandler");
+var routeNotFoundHandler_1 = require("./middleware/routeNotFoundHandler");
+var config_1 = require("./config/config");
+exports.application = (0, express_1.default)();
+var Main = function () {
+    logging.info('---------------------------------');
+    logging.info('----- Initializing the API ------');
+    logging.info('---------------------------------');
+    exports.application.use(express_1.default.urlencoded({ extended: true }));
+    exports.application.use(express_1.default.json());
+    logging.info('---------------------------------');
+    logging.info('---- Logging & Configuration ----');
+    logging.info('---------------------------------');
+    exports.application.use(loggingHandler_1.loggingHandler);
+    exports.application.use(corsHandler_1.corsHandler);
+    logging.info('---------------------------------');
+    logging.info('-- Defining Controller Routing --');
+    logging.info('---------------------------------');
+    exports.application.get('/main/health-check', function (req, res, next) {
+        return res.status(200).json({ msg: 'I am listening ...' });
+    });
+    logging.info('---------------------------------');
+    logging.info('---- Defining Error Routing -----');
+    logging.info('---------------------------------');
+    exports.application.use(routeNotFoundHandler_1.routeNotFoundHandler);
+    logging.info('---------------------------------');
+    logging.info('------ Starting the Server ------');
+    logging.info('---------------------------------');
+    exports.httpServer = http_1.default.createServer(exports.application);
+    exports.httpServer.listen(config_1.SERVER_PORT, function () {
+        logging.info('---------------------------------');
+        logging.info('Server Started: ' + config_1.SERVER_HOSTNAME + ':' + config_1.SERVER_PORT);
+        logging.info('---------------------------------');
+    });
+};
+exports.Main = Main;
+var Shutdown = function (callback) { return exports.httpServer && exports.httpServer.close(callback); };
+exports.Shutdown = Shutdown;
+(0, exports.Main)();
