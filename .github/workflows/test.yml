@@ -1,10 +1,20 @@
-name: Application Test
-on:
-    push:
-        paths:
-            - .github/workflows/test.yml
-    # workflow_dispatch:
-
+name: Code Coverage
+on: [push, pull_request]
 jobs:
-    test:
-    build:
+    run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checking the Repository
+              uses: actions/checkout@v4
+            - name: Setting Up Node 20
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - name: Installing Dependencies
+              run: yarn install
+            - name: Running Tests
+              run: yarn test
+            - name: Upload Coverage Results
+              uses: codecov/codecov-action@v4
+              with:
+                  token: ${{ secrets.GIT_TOKEN_CODE_COVE }}
