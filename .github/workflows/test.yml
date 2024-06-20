@@ -14,7 +14,7 @@ jobs:
               run: yarn install
             - name: Running Tests
               run: yarn test
-            - name: Upload Coverage Results
-              uses: codecov/codecov-action@v4
+            - name: Upload coverage reports to Codecov
+              uses: codecov/codecov-action@v4.0.1
               with:
-                  token: ${{ secrets.GIT_TOKEN_CODE_COVE }}
+                  token: ${{ secrets.CODECOV_TOKEN }}
