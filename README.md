@@ -18,12 +18,11 @@
 
 ```bash
 cd /path/to/repository/root
-docker build -t user-management-server:<version> .
+docker build -t <image-name-tag> .
 ```
 
 ### Run docker image
 
 ```bash
-docker run -it -p 3300:3300 user-management-server:<version> .
-
+docker run -it -p 3300:3300 --name <container-name> -d <image-name-tag>
 ```
