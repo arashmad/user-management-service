@@ -13,3 +13,17 @@
 <hr />
 
 **User Management Service** is a node/express application that helps us to manage user access to other resources.
+
+### Build docker image
+
+```bash
+cd /path/to/repository/root
+docker build -t user-management-server:<version> .
+```
+
+### Run docker image
+
+```bash
+docker run -it -p user-management-server:<version> .
+
+```
