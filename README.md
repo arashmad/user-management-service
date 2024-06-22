@@ -24,6 +24,6 @@ docker build -t user-management-server:<version> .
 ### Run docker image
 
 ```bash
-docker run -it -p user-management-server:<version> .
+docker run -it -p 3300:3300 user-management-server:<version> .
 
 ```
