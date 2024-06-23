@@ -55,6 +55,7 @@ then
 elif [[ $VERSION == 'patch' ]]
 then
     VNUM3=$((VNUM3+1))
+if
 
 # create new tag
 NEW_TAG="$VNUM1.$VNUM2.$VNUM۳"
