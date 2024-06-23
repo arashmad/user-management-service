@@ -49,15 +49,15 @@ VNUM3=${CURRENT_VERSION_PARTS[2]}
 if [[ $VERSION == 'major' ]]
 then
     VNUM1=v$((VNUM1+1))
-elif [[ $VERSION == 'minor']]
+elif [[ $VERSION == 'minor' ]]
 then
     VNUM2=$((VNUM2+1))
-elif [[ $VERSION == 'patch']]
+elif [[ $VERSION == 'patch' ]]
 then
     VNUM3=$((VNUM3+1))
 
 # create new tag
-NEW_TAG="$VNUM1.$VNUM2.$VNUM3"
+NEW_TAG="$VNUM1.$VNUM2.$VNUM۳"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # push the tag to the github
