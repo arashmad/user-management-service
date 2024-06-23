@@ -10,6 +10,8 @@
 # the version automatically and create a tag for docker image pushed
 # to the AWS ECR (Elastic Container Registery)
 #
+# The versioning is based on Semantic Versioning https://semver.org/
+#
 ######################################################################
 
 
@@ -40,8 +42,6 @@ echo "Current Version: $CURRENT_VERSION"
 CURRENT_VERSION_PARTS=(${CURRENT_VERSION//./ })
 
 # get number parts
-# based on Semantic Versioning
-# https://semver.org/
 VNUM1=${CURRENT_VERSION_PARTS[0]}
 VNUM2=${CURRENT_VERSION_PARTS[1]}
 VNUM3=${CURRENT_VERSION_PARTS[2]}
