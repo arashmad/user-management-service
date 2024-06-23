@@ -9,7 +9,7 @@ on:
 
 env:
     ECR_REPOSITORY: user-management-service
-    VERSION: patch
+    VERSION: major
 
 jobs:
     build-and-push-image:
