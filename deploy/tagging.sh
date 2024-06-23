@@ -29,7 +29,7 @@ done
 git fetch --prune --unshallow 2>/dev/null
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
-if [[CURRENT_VERSION == '']]
+if [[ CURRENT_VERSION == '' ]]
 then
     CURRENT_VERSION = 'v0.0.0'
 fi
@@ -66,7 +66,7 @@ GIT_COMMIT=`git rev-parse HEAD`
 NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 
 # only if no tag already exists
-if [-z "$NEEDS_TAG" ]; then
+if [ -z "$NEEDS_TAG" ]; then
     echo "Tagged with $NEW_TAG"
     git tag $NEW_TAG
     git push --tags
