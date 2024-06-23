@@ -5,6 +5,8 @@ const config: Config = {
     testEnvironment: 'node',
     roots: ['<rootDir>/test'],
     detectOpenHandles: true,
+    collectCoverage: true,
+    coverageReporters: ['text', 'cobertura'],
     maxWorkers: 1
 };
 

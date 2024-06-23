@@ -6,10 +6,25 @@
 
 [![NodeJS](https://img.shields.io/badge/NodeJS-v20.12.2-darkgreen)](https://nodejs.org/en)
 [![ExpressJS](https://img.shields.io/badge/ExpressJS-v4.19.2-lightgrey)](https://expressjs.com/)
-[![coverage](https://img.shields.io/badge/coverage-0.00-red)]()
+[![codecov](https://codecov.io/gh/arashmad/user-management-service/branch/solve_issue_1/graph/badge.svg?token=SH4KKTQLZ3)](https://codecov.io/gh/arashmad/user-management-service)
 
 </div>
 
 <hr />
 
 **User Management Service** is a node/express application that helps us to manage user access to other resources.
+
+### Build docker image
+
+```bash
+cd /path/to/repository/root
+docker build -t <image-name-tag> .
+```
+
+### Run docker image
+
+```bash
+docker run -it -p 3300:3300 --name <container-name> -d <image-name-tag>
+```
+
+test
