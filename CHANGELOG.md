@@ -1,4 +1,4 @@
-_This file was prepared and will be updated based on [React Router](https://github.com/remix-run/react-router/blob/main/CHANGELOG.md) repository._
+_I used the template of [React Router](https://github.com/remix-run/react-router/blob/main/CHANGELOG.md) repository for this file._
 
 # User Management Service
 
