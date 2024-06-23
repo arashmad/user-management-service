@@ -29,9 +29,9 @@ done
 git fetch --prune --unshallow 2>/dev/null
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
-if [[ CURRENT_VERSION == '' ]]
+if [[ $CURRENT_VERSION == '' ]]
 then
-    CURRENT_VERSION = 'v0.0.0'
+    CURRENT_VERSION='v0.1.0'
 fi
 echo "Current Version: $CURRENT_VERSION"
 
@@ -55,10 +55,13 @@ then
 elif [[ $VERSION == 'patch' ]]
 then
     VNUM3=$((VNUM3+1))
-if
+else
+    echo "No version type (https://semver.org/) or incorrect type specified, try: -v [major, minor, patch]"
+    exit 1
+fi
 
 # create new tag
-NEW_TAG="$VNUM1.$VNUM2.$VNUM۳"
+NEW_TAG="$VNUM1.$VNUM2.$VNUM3"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # push the tag to the github
