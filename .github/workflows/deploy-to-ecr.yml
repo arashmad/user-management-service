@@ -9,6 +9,7 @@ on:
 
 env:
     ECR_REPOSITORY: user-management-service
+    VERSION: patch
 
 jobs:
     build-and-push-image:
@@ -29,11 +30,16 @@ jobs:
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
 
+            - name: Automatic Tagging of Releases
+              id: increment-git-tag
+              run: |
+                  bash ./deploy/tagging.sh -v $VERSION
+
             - name: Build, Tag and Push the Image to Amazon ECR
               id: build-image
               env:
                   ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-                  IMAGE_TAG: ${{ github.sha }}
+                  IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
               run: |
                   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
                   docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
