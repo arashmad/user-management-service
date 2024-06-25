@@ -7,6 +7,8 @@ import { loggingHandler } from './middleware/loggingHandler';
 import { corsHandler } from './middleware/corsHandler';
 import { routeNotFoundHandler } from './middleware/routeNotFoundHandler';
 
+import routes from './routes';
+
 import { SERVER_HOSTNAME, SERVER_PORT } from './config/config';
 
 export const application = express();
@@ -31,9 +33,7 @@ export const Main = () => {
     logging.info('-- Defining Controller Routing --');
     logging.info('---------------------------------');
 
-    application.get('/main/health-check', (req, res, next) => {
-        return res.status(200).json({ msg: 'I am listening ...' });
-    });
+    application.use('/', routes());
 
     logging.info('---------------------------------');
     logging.info('---- Defining Error Routing -----');
