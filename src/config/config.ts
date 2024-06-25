@@ -19,7 +19,7 @@ const database = process.env.DB_NAME || 'db_name';
 const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 
-export const DATABASE = {
+const DATABASE = {
     host,
     port,
     database,
@@ -27,7 +27,7 @@ export const DATABASE = {
     password
 };
 
-// Export
+// Export configuration
 const config = {
     server: SERVER,
     database: DATABASE
