@@ -7,10 +7,14 @@ import { loggingHandler } from './middleware/loggingHandler';
 import { corsHandler } from './middleware/corsHandler';
 import { routeNotFoundHandler } from './middleware/routeNotFoundHandler';
 
-import { SERVER_HOSTNAME, SERVER_PORT } from './config/config';
+import routes from './routes';
+import { configurationFactory } from './config/config';
+import dataSourceFactory from './database';
 
 export const application = express();
 export let httpServer: ReturnType<typeof http.createServer>;
+
+const { scope, server, db } = configurationFactory();
 
 export const Main = () => {
     logging.info('---------------------------------');
@@ -31,9 +35,7 @@ export const Main = () => {
     logging.info('-- Defining Controller Routing --');
     logging.info('---------------------------------');
 
-    application.get('/main/health-check', (req, res, next) => {
-        return res.status(200).json({ msg: 'I am listening ...' });
-    });
+    application.use('/', routes());
 
     logging.info('---------------------------------');
     logging.info('---- Defining Error Routing -----');
@@ -46,11 +48,25 @@ export const Main = () => {
     logging.info('---------------------------------');
 
     httpServer = http.createServer(application);
-    httpServer.listen(SERVER_PORT, () => {
-        logging.info('---------------------------------');
-        logging.info('Server Started: ' + SERVER_HOSTNAME + ':' + SERVER_PORT);
-        logging.info('---------------------------------');
-    });
+
+    const { host, port } = server;
+
+    if (scope === 'test') {
+        httpServer.listen(port, () => {
+            logging.info('---------------------------------');
+            logging.info('Server Started: ' + host + ':' + port);
+            logging.info('---------------------------------');
+        });
+    } else {
+        dataSourceFactory.initialize().then(() => {
+            httpServer.listen(port, () => {
+                logging.info('---------------------------------');
+                logging.info('Server Started: ' + host + ':' + port);
+                logging.info('Connected to the database successfully.');
+                logging.info('---------------------------------');
+            });
+        });
+    }
 };
 
 export const Shutdown = (callback: any) => httpServer && httpServer.close(callback);
