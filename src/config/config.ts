@@ -43,13 +43,14 @@ interface IConfiguration {
     scope: string;
 }
 
+Object.keys(process.env).map((name) => {
+    if (name.indexOf('_TEST_') >= 0) console.log(name, ':', process.env[name]);
+});
+
 export const configurationFactory = (): IConfiguration => {
     const scope = process.env.NODE_ENV || 'development';
     switch (scope) {
         case 'test':
-            Object.keys(process.env).map((name) => {
-                if (name.indexOf('_TEST_') >= 0) console.log(name, ':', process.env[name]);
-            });
             if (
                 !process.env.PG_TEST_HOST ||
                 !process.env.PG_TEST_PORT ||
