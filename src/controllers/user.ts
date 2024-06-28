@@ -1,78 +1,31 @@
-import { Request, Response, NextFunction } from 'express';
+import { IPostUserRequest, IPostUserResponse } from './schema/user.schema';
 
-import { ConnectDB, QueryDB } from '../config/database';
+import UserCRUD from '../crud/user.crud';
 
-const NAMESPACE = 'Users';
+const createUserController = (req: IPostUserRequest, res: IPostUserResponse) => {
+    // logging.info(NAMESPACE, 'Fetching all users');
 
-const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Fetching all users');
+    // TODOs:
+    // 1. Request Validation
+    // 2. ?
 
-    let query = 'SELECT * FROM users';
-
-    ConnectDB()
-        .then((client) => {
-            QueryDB(client, query)
-                .then((results) => {
-                    return res.status(200).json({
-                        users: results
-                    });
-                })
-                .catch((error) => {
-                    logging.error(NAMESPACE, error);
-                    return res.status(500).json({
-                        message: error.message,
-                        error
-                    });
-                })
-                .finally(() => {
-                    client.end();
-                });
+    UserCRUD.createUser(req.body)
+        .then((result) => {
+            return res.status(200).json({
+                uid: '',
+                message: ''
+            });
         })
         .catch((error) => {
-            logging.error(NAMESPACE, error);
             return res.status(500).json({
-                message: error.message,
-                error
+                error,
+                message: error.message
             });
         });
 };
 
-const createUser = (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Creating a new user');
-
-    let { email, password } = req.body;
-
-    let query = `INSERT INTO users (email, password) VALUES ("${email}","${password}")`;
-
-    ConnectDB()
-        .then((client) => {
-            QueryDB(client, query)
-                .then((results) => {
-                    return res.status(200).json({
-                        users: results
-                    });
-                })
-                .catch((error) => {
-                    logging.error(NAMESPACE, error);
-                    return res.status(500).json({
-                        message: error.message,
-                        error
-                    });
-                })
-                .finally(() => {
-                    client.end();
-                });
-        })
-        .catch((error) => {
-            logging.error(NAMESPACE, error);
-            return res.status(500).json({
-                message: error.message,
-                error
-            });
-        });
+const UserControllers = {
+    createUserController
 };
 
-export default {
-    getAllUsers,
-    createUser
-};
+export default UserControllers;
