@@ -19,6 +19,14 @@ jobs:
                   node-version: 20
             - name: Installing Dependencies
               run: yarn install
+            - name: Create temporary .env file
+              run: |
+                  touch .env
+                  echo NODE_ENV=$ENGINE_API_KEY >> .env
+                  echo SERVER_TEST_HOSTNAME=$SERVER_TEST_HOSTNAME >> .env
+                  echo SERVER_TEST_PORT=$SERVER_TEST_PORT >> .env
+                  echo .env file is like:
+                  cat .env
             - name: Running Tests
               run: yarn test
             - name: Upload coverage reports to Codecov
