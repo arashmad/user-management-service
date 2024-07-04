@@ -7,38 +7,7 @@ dotenv.config();
 export const configurationFactory = (): IApplicationConfiguration => {
     const scope = process.env.NODE_ENV || 'development';
     switch (scope) {
-        case 'test':
-            if (
-                !process.env.PG_TEST_HOST ||
-                !process.env.PG_TEST_PORT ||
-                !process.env.PG_TEST_DB_NAME ||
-                !process.env.PG_TEST_USER ||
-                !process.env.PG_TEST_PASSWORD ||
-                !process.env.SERVER_TEST_HOSTNAME ||
-                !process.env.SERVER_TEST_PORT
-            ) {
-                throw Error('Missing configuration setting. Check .env file.');
-            }
-            return {
-                db: {
-                    host: process.env.PG_TEST_HOST,
-                    port: Number(process.env.PG_TEST_PORT),
-                    database: process.env.PG_TEST_DB_NAME,
-                    user: process.env.PG_TEST_USER,
-                    password: process.env.PG_TEST_PASSWORD
-                },
-                server: {
-                    host: process.env.SERVER_TEST_HOSTNAME,
-                    port: Number(process.env.SERVER_TEST_PORT)
-                },
-                tokenConfig: {
-                    secret: 'hahahaha',
-                    expireIn: '1h'
-                }
-            };
-
         case 'development':
-        default:
             if (
                 !process.env.PG_DEV_HOST ||
                 !process.env.PG_DEV_PORT ||
@@ -95,6 +64,74 @@ export const configurationFactory = (): IApplicationConfiguration => {
                     expireIn: '1h'
                 }
             };
+
+        default:
+            if (
+                !process.env.PG_TEST_HOST ||
+                !process.env.PG_TEST_PORT ||
+                !process.env.PG_TEST_DB_NAME ||
+                !process.env.PG_TEST_USER ||
+                !process.env.PG_TEST_PASSWORD ||
+                !process.env.SERVER_TEST_HOSTNAME ||
+                !process.env.SERVER_TEST_PORT
+            ) {
+                throw Error('Missing configuration setting. Check .env file.');
+            }
+            return {
+                db: {
+                    host: process.env.PG_TEST_HOST,
+                    port: Number(process.env.PG_TEST_PORT),
+                    database: process.env.PG_TEST_DB_NAME,
+                    user: process.env.PG_TEST_USER,
+                    password: process.env.PG_TEST_PASSWORD
+                },
+                server: {
+                    host: process.env.SERVER_TEST_HOSTNAME,
+                    port: Number(process.env.SERVER_TEST_PORT)
+                },
+                tokenConfig: {
+                    secret: 'hahahaha',
+                    expireIn: '1h'
+                }
+            };
+
+        // default:
+        //     if (
+        //         !process.env.PG_HOST ||
+        //         !process.env.PG_PORT ||
+        //         !process.env.PG_DB_NAME ||
+        //         !process.env.PG_USER ||
+        //         !process.env.PG_PASSWORD ||
+        //         !process.env.SERVER_HOSTNAME ||
+        //         !process.env.SERVER_PORT
+        //     ) {
+        //         console.log(process.env.PG_HOST);
+        //         console.log(process.env.PG_PORT);
+        //         console.log(process.env.PG_DB_NAME);
+        //         console.log(process.env.PG_USER);
+        //         console.log(process.env.PG_PASSWORD);
+        //         console.log(process.env.SERVER_HOSTNAME);
+        //         console.log(process.env.SERVER_PORT);
+
+        //         throw Error('Missing configuration setting. Check .env file.');
+        //     }
+        //     return {
+        //         db: {
+        //             host: process.env.PG_HOST,
+        //             port: Number(process.env.PG_PORT),
+        //             database: process.env.PG_DB_NAME,
+        //             user: process.env.PG_USER,
+        //             password: process.env.PG_PASSWORD
+        //         },
+        //         server: {
+        //             host: process.env.SERVER_HOSTNAME,
+        //             port: Number(process.env.SERVER_PORT)
+        //         },
+        //         tokenConfig: {
+        //             secret: 'hahahaha',
+        //             expireIn: '1h'
+        //         }
+        //     };
     }
 };
 
