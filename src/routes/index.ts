@@ -1,12 +1,14 @@
 import { Router } from 'express';
 
-import healthCheck from './healthCheck';
-import user from './user';
+import ping from './ping';
+import auth from './auth';
+// import user from './user';
 
 const router = Router();
 
 export default (): Router => {
-    healthCheck(router);
-    user(router);
+    ping(router);
+    auth(router);
+    // user(router);
     return router;
 };
