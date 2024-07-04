@@ -6,15 +6,13 @@ import './config/logging';
 import { loggingHandler } from './middleware/loggingHandler';
 import { corsHandler } from './middleware/corsHandler';
 import { routeNotFoundHandler } from './middleware/routeNotFoundHandler';
+import { httpExceptionHandler } from './middleware/globalErrorHandler';
 
 import routes from './routes';
 import { configurationFactory } from './config/config';
-import dataSourceFactory from './database';
 
 export const application = express();
 export let httpServer: ReturnType<typeof http.createServer>;
-
-const { scope, server, db } = configurationFactory();
 
 export const Main = () => {
     logging.info('---------------------------------');
@@ -23,13 +21,13 @@ export const Main = () => {
 
     application.use(express.urlencoded({ extended: true }));
     application.use(express.json());
+    application.use(corsHandler);
 
     logging.info('---------------------------------');
     logging.info('---- Logging & Configuration ----');
     logging.info('---------------------------------');
 
     application.use(loggingHandler);
-    application.use(corsHandler);
 
     logging.info('---------------------------------');
     logging.info('-- Defining Controller Routing --');
@@ -42,31 +40,21 @@ export const Main = () => {
     logging.info('---------------------------------');
 
     application.use(routeNotFoundHandler);
+    application.use(httpExceptionHandler);
 
     logging.info('---------------------------------');
     logging.info('------ Starting the Server ------');
     logging.info('---------------------------------');
 
-    httpServer = http.createServer(application);
-
+    const { server } = configurationFactory();
     const { host, port } = server;
 
-    if (scope === 'test') {
-        httpServer.listen(port, () => {
-            logging.info('---------------------------------');
-            logging.info('Server Started: ' + host + ':' + port);
-            logging.info('---------------------------------');
-        });
-    } else {
-        dataSourceFactory.initialize().then(() => {
-            httpServer.listen(port, () => {
-                logging.info('---------------------------------');
-                logging.info('Server Started: ' + host + ':' + port);
-                logging.info('Connected to the database successfully.');
-                logging.info('---------------------------------');
-            });
-        });
-    }
+    httpServer = http.createServer(application);
+    httpServer.listen(port, () => {
+        logging.info('-------------------------------------');
+        logging.info('Server Started: ' + host + ':' + port);
+        logging.info('-------------------------------------');
+    });
 };
 
 export const Shutdown = (callback: any) => httpServer && httpServer.close(callback);
