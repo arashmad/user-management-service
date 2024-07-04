@@ -19,6 +19,8 @@ jobs:
               uses: actions/checkout@v4
             - name: Setting Up Node 20
               uses: actions/setup-node@v4
+              with:
+                  node-version: 20
             - name: create env file
               run: |
                   touch .env
@@ -30,8 +32,6 @@ jobs:
                   echo PG_TEST_USER=${{ PG_USER }} >> .env
                   echo PG_TEST_PASSWORD=${{ PG_PASSWORD }} >> .env
                   echo .env
-              with:
-                  node-version: 20
             - name: Installing Dependencies
               run: yarn install
             - name: Running Tests
