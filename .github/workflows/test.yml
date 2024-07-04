@@ -1,5 +1,16 @@
 name: Code Coverage
+
 on: [push, pull_request]
+
+env:
+    SERVER_HOSTNAME: localhost
+    SERVER_PORT: 3302
+    PG_HOST: localhost
+    PG_PORT: 5433
+    PG_DB_NAME: ums_db
+    PG_USER: postgres
+    PG_PASSWORD: Am_Adm!n
+
 jobs:
     run:
         runs-on: ubuntu-latest
@@ -10,6 +21,17 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 20
+            - name: create env file
+              run: |
+                  touch .env
+                  echo SERVER_TEST_HOSTNAME=$SERVER_HOSTNAME >> .env
+                  echo SERVER_TEST_PORT=$SERVER_PORT >> .env
+                  echo PG_TEST_HOST=$PG_HOST >> .env
+                  echo PG_TEST_PORT=$PG_PORT >> .env
+                  echo PG_TEST_DB_NAME=$PG_DB_NAME >> .env
+                  echo PG_TEST_USER=$PG_USER >> .env
+                  echo PG_TEST_PASSWORD=$PG_PASSWORD >> .env
+                  echo .env
             - name: Installing Dependencies
               run: yarn install
             - name: Running Tests

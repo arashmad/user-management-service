@@ -19,7 +19,6 @@ describe('Our Application', () => {
 
     it('Endpoint not found', async () => {
         const response = await request(application).get('/');
-        console.log(response.error.toString());
         expect(response.status).toBe(404);
         expect(response.body.error.message).toBe('Not found');
     });
